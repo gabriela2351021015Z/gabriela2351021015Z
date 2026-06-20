@@ -33,7 +33,7 @@
 
             try {
                 // REEMPLAZA ESTA URL POR TU "PRODUCTION URL" DE N8N
-                const response = await fetch('AQUÍ_VA_TU_URL_DE_PRODUCCIÓN_DE_N8N', {
+               const response = await fetch('https://whoops-name-walnut.ngrok-free.dev/webhook/tienda', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: texto })
