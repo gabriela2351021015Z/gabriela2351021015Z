@@ -40,10 +40,10 @@
             try {
                 // MANTÉN AQUÍ TU URL DE NGROK/N8N
                 const response = await fetch('https://whoops-name-walnut.ngrok-free.dev/webhook/tienda', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: texto })
-                });
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: texto })
+});
 
                 const data = await response.json();
                 chatBox.innerHTML += `<p><b>Maribel Bot:</b> ${data.respuesta}</p>`;
