@@ -1,34 +1,35 @@
-async function enviarMensaje() {
-    console.log("¡El botón funciona!"); // Esto debería salir en la consola al hacer clic
-    
-    const input = document.getElementById('userInput');
-    const chatBox = document.getElementById('chat-box');
-    const texto = input.value;
-    
-    if (!texto) {
-        alert("El campo está vacío");
-        return;
-    }
-
-    chatBox.innerHTML += `<p><b>Tú:</b> ${texto}</p>`;
-    input.value = '';
-
-    try {
-        console.log("Intentando conectar con:", 'https://whoops-name-walnut.ngrok-free.dev/webhook/tienda');
+<script>
+    async function enviarMensaje() {
+        console.log("¡El botón funciona!");
+        const input = document.getElementById('userInput');
+        const chatBox = document.getElementById('chat-box');
+        const texto = input.value;
         
-        const response = await fetch('https://whoops-name-walnut.ngrok-free.dev/webhook/tienda', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: texto })
-        });
+        if (!texto) {
+            alert("El campo está vacío");
+            return;
+        }
 
-        const data = await response.json();
-        console.log("Respuesta recibida:", data); // Esto nos dirá qué devuelve el servidor
-        
-        const respuestaBot = data.respuesta || data.output || "Sin respuesta";
-        chatBox.innerHTML += `<p><b>Bot:</b> ${respuestaBot}</p>`;
-    } catch (error) {
-        console.error("Error capturado:", error);
-        chatBox.innerHTML += `<p style="color:red;">Error en la conexión.</p>`;
+        chatBox.innerHTML += `<p><b>Tú:</b> ${texto}</p>`;
+        input.value = '';
+
+        try {
+            console.log("Intentando conectar...");
+            const response = await fetch('https://whoops-name-walnut.ngrok-free.dev/webhook/tienda', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: texto })
+            });
+
+            const data = await response.json();
+            console.log("Respuesta recibida:", data);
+            
+            const respuestaBot = data.respuesta || data.output || "Sin respuesta";
+            chatBox.innerHTML += `<p><b>Bot:</b> ${respuestaBot}</p>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (error) {
+            console.error("Error capturado:", error);
+            chatBox.innerHTML += `<p style="color:red;">Error en la conexión.</p>`;
+        }
     }
-}
+</script>
